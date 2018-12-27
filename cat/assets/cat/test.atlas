@@ -32,13 +32,6 @@ ear2
   orig: 323, 320
   offset: 66, 17
   index: -1
-eye2
-  rotate: false
-  xy: 766, 1
-  size: 214, 209
-  orig: 323, 271
-  offset: 58, 28
-  index: -1
 eye1
   rotate: false
   xy: 312, 271
@@ -46,12 +39,12 @@ eye1
   orig: 263, 252
   offset: 24, 15
   index: -1
-mouse1
+eye2
   rotate: false
-  xy: 133, 443
-  size: 111, 78
-  orig: 171, 134
-  offset: 34, 26
+  xy: 766, 1
+  size: 214, 209
+  orig: 323, 271
+  offset: 58, 28
   index: -1
 mouse2
   rotate: false
@@ -59,6 +52,13 @@ mouse2
   size: 130, 74
   orig: 197, 193
   offset: 44, 70
+  index: -1
+mouse1
+  rotate: false
+  xy: 133, 443
+  size: 111, 78
+  orig: 171, 134
+  offset: 34, 26
   index: -1
 mos1
   rotate: false
@@ -88,19 +88,19 @@ hair2
   orig: 206, 221
   offset: 48, 38
   index: -1
-mos1-1
-  rotate: false
-  xy: 859, 711
-  size: 91, 117
-  orig: 146, 169
-  offset: 28, 26
-  index: -1
 mos2-2
   rotate: false
   xy: 756, 592
   size: 101, 135
   orig: 148, 173
   offset: 22, 14
+  index: -1
+mos1-1
+  rotate: false
+  xy: 859, 711
+  size: 91, 117
+  orig: 146, 169
+  offset: 28, 26
   index: -1
 tail1
   rotate: false
