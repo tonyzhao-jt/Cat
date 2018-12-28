@@ -46,6 +46,12 @@ cc.Class({
         scrollView:{
             type:cc.ScrollView,
             default:null,
+        },
+
+        // 皮肤数据
+        skin_data:{
+            type: Array,
+            default: null,
         }
 
 
