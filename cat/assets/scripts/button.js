@@ -72,7 +72,14 @@ cc.Class({
     }, 
 
     generateDefault(){
-        this.cat.getComponent('cat').skin_id = [1,1,1,1,2,1,1,2,1,1,1]
+        this.cat.getComponent('cat').skin_id = [1,1,1,1,1,1,1,1,1,1,1]
+        this.cat.getComponent('cat').refresh()
+    },
+
+    setDefault(event, customEventData){
+        let default_skin = [1,1,1,1,1,1,1,1,1,1,1]
+        default_skin[customEventData] = 2
+        this.cat.getComponent('cat').skin_id = default_skin
         this.cat.getComponent('cat').refresh()
     },
 

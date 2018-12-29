@@ -801,8 +801,8 @@
       "__id__": 2
     },
     "component": "button",
-    "handler": "alert",
-    "customEventData": "1"
+    "handler": "setDefault",
+    "customEventData": "3"
   },
   {
     "__type__": "cc.Node",
@@ -1637,6 +1637,7 @@
     },
     "scrollView": {
       "__id__": 29
-    }
+    },
+    "skin_data": null
   }
 ]
