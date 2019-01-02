@@ -802,7 +802,7 @@
     },
     "component": "button",
     "handler": "setDefault",
-    "customEventData": "3"
+    "customEventData": "5"
   },
   {
     "__type__": "cc.Node",
