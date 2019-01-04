@@ -9,6 +9,7 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
 var bag_length = 10
+var server_address = 'http://localhost:5000'
 cc.Class({
     extends: cc.Component,
     editor: {
@@ -81,6 +82,26 @@ cc.Class({
         default_skin[customEventData] = 2
         this.cat.getComponent('cat').skin_id = default_skin
         this.cat.getComponent('cat').refresh()
+    
+        // text post
+        let params = {
+            'test':'test'
+        }
+
+        var that = this
+
+        httpUtils.getInstance().httpGets(server_address, function(data){
+            that.parseSkinData(data)
+        })
+
+
+    },
+    
+    // web socket
+
+    // parse the skin data from web
+    parseSkinData(response){
+        console.log(response)
     },
 
     setSkin(){
