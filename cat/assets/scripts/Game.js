@@ -23,12 +23,12 @@ cc.Class({
             default: null
         },
 
-        total_time: 120
-
-        /* button: {
-            type: cc.Button,
+        progress: {
+            type: cc.Sprite,
             default: null
-        } */
+        },
+
+        total_time: 120
         
 
     },
@@ -66,6 +66,13 @@ cc.Class({
 
     stopFeeding: function (event, customEventData) {
         this.startCount = 0;
+        this.Timer = Math.round(this.total_time * this.slider.progress);
+        this.slider.progress = this.Timer / this.total_time;
+        this.progress.node.width = this.slider.progress * 600;
+    },
+
+    backMain: function (event, customEventData) {
+        cc.director.loadScene('main');
     },
 
     start () {
@@ -94,6 +101,7 @@ cc.Class({
 
                 if (this.second == 0 && this.Timer == 0) {
                     this.startCount = 0;
+                    cc.director.loadScene('main');
                 }
                 
                 if ( this.second >= 10 ) 

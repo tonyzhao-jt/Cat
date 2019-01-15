@@ -37,10 +37,6 @@ cc.Class({
             {
                 this.progress.node.width = this.slider.progress * this.sli_width;
             }
-            else 
-            {
-                return;
-            }
         },this)
     },
 
@@ -50,9 +46,9 @@ cc.Class({
 
     update (dt) {
 
-        var per = (this.game.second + this.game.Timer*60) / (this.game.total_time*60)
         if (this.game.startCount == 1) 
         {
+            var per = (this.game.second + this.game.Timer*60) / (this.game.total_time*60)
             this.progress.node.width = Math.round(this.sli_width * per);
             this.slider.progress = per;
         }

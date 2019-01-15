@@ -134,6 +134,10 @@ cc.Class({
         this.refreshSkin()
     },
 
+    goRaising: function (event, customEventData) {
+        cc.director.loadScene('Raising')
+    },
+
     confirm: function(){
         console.log('确认')
     }
