@@ -8,6 +8,8 @@
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
+var glo = require('Global');
+
 cc.Class({
     extends: cc.Component,
 
@@ -44,13 +46,13 @@ cc.Class({
 
     },
 
-    update (dt) {
+    /* update (dt) {
 
         if (this.game.startCount == 1) 
         {
-            var per = (this.game.second + this.game.Timer*60) / (this.game.total_time*60)
+            var per = (glo.second + glo.Timer*60) / (this.game.total_time*60)
             this.progress.node.width = Math.round(this.sli_width * per);
             this.slider.progress = per;
         }
-    },
+    }, */
 });

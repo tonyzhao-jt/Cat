@@ -8,6 +8,9 @@
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
+
+var glo = require('Global');
+
 cc.Class({
     extends: cc.Component,
 
@@ -41,35 +44,34 @@ cc.Class({
         this.string = this.getComponent(cc.Label);
         this.slider = this.time.getComponent(cc.Slider);
         this.time.getComponent('Time_Slider').game = this;
-        
-        this.Timer = Math.round(this.total_time * this.slider.progress);
-        this.label.string = this.Timer;
+
     },
 
     startFeeding: function (event) {
-        switch (this.startCount)
+        cc.director.loadScene('Raising2')
+        /* switch (this.startCount)
         {
             case 0:
-                if (this.Timer == 0){
+                if (glo.Timer == 0){
                     break;
                 }
                 this.startCount = 1;
-                this.Timer -= 1;
-                this.second = 0;
+                glo.Timer -= 1;
+                glo.second = 0;
                 this.count = 0;
                 break;
             
             case 1:
                 break;
-        }
+        } */
     },
 
-    stopFeeding: function (event, customEventData) {
+    /* stopFeeding: function (event, customEventData) {
         this.startCount = 0;
-        this.Timer = Math.round(this.total_time * this.slider.progress);
-        this.slider.progress = this.Timer / this.total_time;
+        glo.Timer = Math.round(this.total_time * this.slider.progress);
+        this.slider.progress = glo.Timer / this.total_time;
         this.progress.node.width = this.slider.progress * 600;
-    },
+    }, */
 
     backMain: function (event, customEventData) {
         cc.director.loadScene('main');
@@ -82,41 +84,40 @@ cc.Class({
 
     update (dt) {
         
-        switch (this.startCount) 
+        glo.Timer = Math.round(this.total_time * this.slider.progress);
+        this.label.string = glo.Timer + ":00";
+
+        /* switch (this.startCount) 
         {
             case 0:
-                this.Timer = Math.round(this.total_time * this.slider.progress);
-                this.label.string = this.Timer + ":00";
+                glo.Timer = Math.round(this.total_time * this.slider.progress);
+                this.label.string = glo.Timer + ":00";
                 break;
             
             case 1:
 
-                this.second = Math.round(59.5 - this.count);
+                glo.second = Math.round(59.5 - this.count);
                 this.count += dt;
                 
-                if (this.count > 60 && this.Timer > 0) {
+                if (this.count > 60 && glo.Timer > 0) {
                     this.count = 0;
-                    this.Timer -= 1
+                    glo.Timer -= 1
                 }
 
-                if (this.second == 0 && this.Timer == 0) {
+                if (glo.second == 0 && glo.Timer == 0) {
                     this.startCount = 0;
                     cc.director.loadScene('main');
                 }
                 
-                if ( this.second >= 10 ) 
+                if ( glo.second >= 10 ) 
                 {
-                    this.label.string = this.Timer + ":" + this.second;
+                    this.label.string = glo.Timer + ":" + glo.second;
                 } 
                 else 
                 {
-                    this.label.string = this.Timer + ":0" + this.second;
+                    this.label.string = glo.Timer + ":0" + glo.second;
                 }
                 break;
-        }
-
-
-        
-
-    },
+        } */
+    }, 
 });
