@@ -50,6 +50,11 @@ cc.Class({
             default:null,
         },
 
+        mask_out:{
+            type:cc.Node,
+            default:null,
+        },
+
         // 皮肤数据
         skin_data:{
             type: Array,
@@ -156,11 +161,13 @@ cc.Class({
     },
 
     closeBag: function(event, customEventData) {
-        this.scrollView.node.active = false
+        this.scrollView.node.active = false;
+        this.mask_out.active = false;
     },
     
     openBag: function (event, customEventData) {
-        this.scrollView.node.active = true
+        this.scrollView.node.active = true;
+        this.mask_out.active = true;
         this.refreshSkin()
     },
 
