@@ -89,7 +89,7 @@
   {
     "__type__": "cc.Node",
     "_name": "New Sprite(Splash)",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 1
     },
@@ -742,13 +742,13 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
+      "x": 0,
+      "y": 0
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -3,
-      "y": 76,
+      "x": -125,
+      "y": 58,
       "z": 0
     },
     "_scale": {
@@ -795,7 +795,7 @@
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
+    "_N$overflow": 1,
     "_id": ""
   },
   {

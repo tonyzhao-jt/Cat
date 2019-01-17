@@ -100,12 +100,22 @@ cc.Class({
 
     setSkin(){
         // var bag = this.bag = []
-        // 生成包内内容
+        // 手动生成home内内容
         for(var i =0; i<bag_length;i++){
+            // 默认的皮肤
+            var default_array = [1,1,1,1,2,2,1,2,1,2,1];
             var opt_item = cc.instantiate(this.opt_prefab);
             
-            let target = opt_item.getChildByName('cat')
-            target.getComponent('cat').skin_id=[1,1,1,1,2,2,1,2,1,2,1];
+            let cat = opt_item.getChildByName('cat');
+            cat.getComponent('cat').skin_id=default_array;
+
+            let title = opt_item.getChildByName('number');
+            title.getComponent(cc.Label).string = i + "";
+
+            let cat_data = opt_item.getChildByName('cat-data');
+            cat_data.getChildByName('data').getComponent(cc.Label).string = "\
+            head:"+default_array[0]+",1,1,1,2,2,1,2,1,2,1";
+            
             this.scrollView.content.addChild(opt_item)
         }
     },
