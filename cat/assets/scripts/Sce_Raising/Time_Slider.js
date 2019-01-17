@@ -35,7 +35,7 @@ cc.Class({
         this.progress.node.width = this.slider.progress * this.sli_width;
 
         this.slider.node.on('slide', function(event) {
-            if(this.game.startCount == 0) 
+            if(glo.startCount == 0) 
             {
                 this.progress.node.width = this.slider.progress * this.sli_width;
             }
@@ -46,13 +46,13 @@ cc.Class({
 
     },
 
-    /* update (dt) {
+    update (dt) {
 
-        if (this.game.startCount == 1) 
+        if (glo.startCount) 
         {
             var per = (glo.second + glo.Timer*60) / (this.game.total_time*60)
             this.progress.node.width = Math.round(this.sli_width * per);
             this.slider.progress = per;
         }
-    }, */
+    },
 });

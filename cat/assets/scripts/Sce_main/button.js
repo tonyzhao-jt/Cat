@@ -8,7 +8,9 @@
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
-var bag_length = 10
+var bag_length = 10;
+var glo = require('Global');
+
 cc.Class({
     extends: cc.Component,
     editor: {
@@ -52,9 +54,17 @@ cc.Class({
         skin_data:{
             type: Array,
             default: null,
-        }
+        },
 
+        raising: {
+            type: cc.Sprite,
+            default: null
+        },
 
+        closeDone: {
+            type: cc.Sprite,
+            default: null
+        },
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -65,9 +75,9 @@ cc.Class({
         // 生成默认
         this.generateDefault();
         // 生成包内 id
-        this.setSkin()
-
-
+        this.setSkin();
+        // 吸引状态显示
+        this.statusDiffer();
         
     }, 
 
@@ -104,6 +114,26 @@ cc.Class({
         }   
     },
 
+    statusDiffer: function() {
+        //显示吸引状态（代码待修改）
+        console.log(glo.startCount)
+        switch (glo.startCount) 
+        {
+            case 0: 
+                this.raising.node.active = false;
+                this.closeDone.node.active = false;
+                break;
+            case 1:
+                this.raising.node.active = true;
+                this.closeDone.node.active = false;
+                break;
+            case 2:
+                this.raising.node.active = false;
+                this.closeDone.node.active = true;
+                break;
+        }
+    },
+
     start () {
         // 更新包内皮肤
          
@@ -135,7 +165,15 @@ cc.Class({
     },
 
     goRaising: function (event, customEventData) {
+        if (glo.startCount == 2) {
+            glo.startCount = 0;
+        }
         cc.director.loadScene('Raising')
+    },
+
+    closeDoneSprite: function (event, customEventData)  {
+        glo.startCount = 0;
+        this.closeDone.node.active = false  
     },
 
     confirm: function(){

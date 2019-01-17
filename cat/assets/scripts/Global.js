@@ -11,4 +11,6 @@
 module.exports = {
     Timer: 0,
     second: 0,
+    count: 0,
+    startCount: 0,
 };

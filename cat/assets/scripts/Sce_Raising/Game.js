@@ -39,39 +39,35 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.startCount = 0;
 
         this.string = this.getComponent(cc.Label);
         this.slider = this.time.getComponent(cc.Slider);
         this.time.getComponent('Time_Slider').game = this;
+        
 
     },
 
     startFeeding: function (event) {
-        cc.director.loadScene('Raising2')
-        /* switch (this.startCount)
+        //cc.director.loadScene('Raising2')
+        if (!glo.startCount) 
         {
-            case 0:
-                if (glo.Timer == 0){
-                    break;
-                }
-                this.startCount = 1;
-                glo.Timer -= 1;
-                glo.second = 0;
-                this.count = 0;
-                break;
-            
-            case 1:
-                break;
-        } */
+            if (glo.Timer == 0){
+                return;
+            }
+            glo.startCount = 1;
+            glo.Timer -= 1;
+            glo.second = 0;
+            glo.count = 0;
+        }
+                
     },
 
-    /* stopFeeding: function (event, customEventData) {
-        this.startCount = 0;
+    stopFeeding: function (event, customEventData) {
+        glo.startCount = 0;
         glo.Timer = Math.round(this.total_time * this.slider.progress);
         this.slider.progress = glo.Timer / this.total_time;
         this.progress.node.width = this.slider.progress * 600;
-    }, */
+    }, 
 
     backMain: function (event, customEventData) {
         cc.director.loadScene('main');
@@ -83,11 +79,8 @@ cc.Class({
 
 
     update (dt) {
-        
-        glo.Timer = Math.round(this.total_time * this.slider.progress);
-        this.label.string = glo.Timer + ":00";
 
-        /* switch (this.startCount) 
+        switch (glo.startCount) 
         {
             case 0:
                 glo.Timer = Math.round(this.total_time * this.slider.progress);
@@ -95,20 +88,6 @@ cc.Class({
                 break;
             
             case 1:
-
-                glo.second = Math.round(59.5 - this.count);
-                this.count += dt;
-                
-                if (this.count > 60 && glo.Timer > 0) {
-                    this.count = 0;
-                    glo.Timer -= 1
-                }
-
-                if (glo.second == 0 && glo.Timer == 0) {
-                    this.startCount = 0;
-                    cc.director.loadScene('main');
-                }
-                
                 if ( glo.second >= 10 ) 
                 {
                     this.label.string = glo.Timer + ":" + glo.second;
@@ -118,6 +97,6 @@ cc.Class({
                     this.label.string = glo.Timer + ":0" + glo.second;
                 }
                 break;
-        } */
+        }
     }, 
 });
