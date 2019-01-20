@@ -9,6 +9,7 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
 var bag_length = 10;
+let shop_length = 10;
 var glo = require('Global');
 
 cc.Class({
@@ -40,11 +41,16 @@ cc.Class({
             default:null,
         },
 
+        catForSale:{
+            type: cc.Prefab,
+            default: null
+        },
+
         opt_prefab:{
             type:cc.Prefab,
             default: null,
         },
-
+        //按钮
         scrollView:{
             type:cc.ScrollView,
             default:null,
@@ -54,6 +60,11 @@ cc.Class({
             type:cc.Node,
             default:null,
         },
+        
+        shop:{
+            type:cc.PageView,
+            default: null
+        },
 
         // 皮肤数据
         skin_data:{
@@ -61,12 +72,13 @@ cc.Class({
             default: null,
         },
 
-        raising: {
+        //养猫图案
+        raising:{
             type: cc.Sprite,
             default: null
         },
 
-        closeDone: {
+        closeDone:{
             type: cc.Sprite,
             default: null
         },
@@ -77,10 +89,12 @@ cc.Class({
     onLoad () {
         // 隐藏
         this.scrollView.node.active = false;
+        this.shop.node.active = false;
         // 生成默认
         this.generateDefault();
         // 生成包内 id
         this.setSkin();
+        this.setShop();
         // 吸引状态显示
         this.statusDiffer();
         
@@ -96,6 +110,15 @@ cc.Class({
         default_skin[customEventData] = 2
         this.cat.getComponent('cat').skin_id = default_skin
         this.cat.getComponent('cat').refresh()
+    },
+
+    handleEvent() {
+        var eventHandler = new cc.Component.EventHandler();
+        eventHandler.target = this.node;
+        eventHandler.component = 'button';
+        eventHandler.handler = 'buyCat';
+
+        return eventHandler;
     },
 
     setSkin(){
@@ -120,17 +143,48 @@ cc.Class({
         }
     },
 
+    setShop() {
+        //Initialize the status of cats in the shop
+        if (!glo.catsInShopStatus[0]) {
+            for (var i=0; i < shop_length; i++) {
+                glo.catsInShopStatus.push(0);
+            }
+        }
+
+        for (var i=0; i < shop_length; i++) 
+        {
+            var eventHandler = this.handleEvent();
+            eventHandler.customEventData = i+1;
+
+            var shopCat = cc.instantiate(this.catForSale);
+            var buy = shopCat.getChildByName('Buy');
+            var money = buy.getChildByName('buy').getComponent(cc.Label);
+
+            var buy_btn = buy.getComponent(cc.Button);
+            buy_btn.clickEvents.push(eventHandler);
+            
+            if (!glo.catsInShopStatus[i+1]) {
+                money.string = "$ " + (i+1); 
+            } else {
+                money.string = '已拥有'
+            }
+
+            this.shop.addPage(shopCat);
+
+        }
+        glo.catsInShopStatus[0] = 1;
+    },
+
     refreshSkin(){
         let local = this.scrollView.content.getChildren()
         for(var i =0; i<local.length;i++){
             let opt_item = local[i]
             opt_item.getChildByName('cat').getComponent('cat').refresh()
-            
         }   
     },
 
     statusDiffer: function() {
-        //显示吸引状态（代码待修改）
+        //显示吸引状态
         console.log(glo.startCount)
         switch (glo.startCount) 
         {
@@ -157,7 +211,7 @@ cc.Class({
 
 
 
-    // update (dt) {},
+    //update (dt) {},
 
     alert: function (event, customEventData) {
         // //这里 event 是一个 Touch Event 对象，你可以通过 event.target 取到事件的发送节点
@@ -181,11 +235,28 @@ cc.Class({
         this.refreshSkin()
     },
 
+    goShopping: function (event, customEventData) {
+        this.shop.node.active = true;
+    },
+
+    closeShop: function (event, customEventData) {
+        this.shop.node.active = false;
+    },
+
     goRaising: function (event, customEventData) {
         if (glo.startCount == 2) {
             glo.startCount = 0;
         }
         cc.director.loadScene('Raising')
+    },
+
+    buyCat:function (event, customEventData) {
+        var cats = this.shop.content.getChildren();
+        var cat = cats[customEventData-1].getChildByName('Buy');
+        var money = cat.getChildByName('buy').getComponent(cc.Label);
+
+        money.string = "已拥有";
+        glo.catsInShopStatus[customEventData] = 1;
     },
 
     closeDoneSprite: function (event, customEventData)  {

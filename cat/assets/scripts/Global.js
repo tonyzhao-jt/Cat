@@ -13,4 +13,5 @@ module.exports = {
     second: 0,
     count: 0,
     startCount: 0,
+    catsInShopStatus:[0],
 };
